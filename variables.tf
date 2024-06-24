@@ -12,6 +12,7 @@ variable "vpc" {
     env        = string
   })
   default = {
-    cidr_block = ""
-  
+    cidr_block = "192.168.0.0/16"
+    name = weather_wiz_vpc
+    env = prod
 }

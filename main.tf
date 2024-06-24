@@ -19,7 +19,7 @@ provider "aws" {
 resource "aws_vpc" "weather_wiz_vpc" {
   cidr_block = var.vpc.cidr_block
   tags = {
-    Name = var.vpc.name
+    name = var.vpc.name
     env  = var.vpc.env
   }
 }
