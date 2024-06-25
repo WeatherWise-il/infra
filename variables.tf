@@ -50,3 +50,14 @@ variable "weather_wiz_vpc_ecr_repository" {
     repository_type = "private"
 }
 }
+
+variable "aws_user" {
+  description = "The AWS user configuration."
+  type        = object({
+    name = string
+  })
+  default = {
+    name = "github-actions-user"
+}
+  
+}
