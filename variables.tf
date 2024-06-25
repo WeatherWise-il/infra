@@ -37,3 +37,16 @@ variable "common_tags" {
     env  = "prod"
   }
 }
+
+
+variable "weather_wiz_vpc_ecr_repository" {
+  description = "The VPC configuration."
+  type        = object({
+    repository_name = string
+    repository_type = string
+  })
+  default = {
+    repository_name = "weather_wiz_app_repository"
+    repository_type = "private"
+}
+}
