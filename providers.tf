@@ -12,14 +12,5 @@ terraform {
 }
 # AWS provider
 provider "aws" {
-  region = var.aws_region
-}
-
-
-resource "aws_vpc" "weather_wiz_vpc" {
-  cidr_block = var.vpc.cidr_block
-  tags = {
-    name = var.vpc.name
-    env  = var.vpc.env
-  }
+  region = "us-east-1"
 }
