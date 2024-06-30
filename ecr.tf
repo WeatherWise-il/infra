@@ -1,8 +1,9 @@
+
 module "weather_wiz_app_repository" {
   source  = "terraform-aws-modules/ecr/aws"
   version = "1.6.0"
-
-  repository_name                 = var.weather_wiz_vpc_ecr_repository.repository_name
+  for_each = toset(["weather_wiz_app_backend", "weather_wiz_app_frontend", "weather_wiz_app_db", "weather_wiz_app_nginx"])
+  repository_name                 = each.key
   repository_type                 = var.weather_wiz_vpc_ecr_repository.repository_type
   repository_image_tag_mutability = "IMMUTABLE"
   create_lifecycle_policy         = true
@@ -27,3 +28,7 @@ module "weather_wiz_app_repository" {
 
   tags = merge(var.common_tags)
 }
+
+
+
+

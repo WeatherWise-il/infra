@@ -29,7 +29,9 @@ resource "aws_iam_policy" "github_actions_user_access_policy" {
           "ecr:BatchCheckLayerAvailability",
           "ecr:PutImage"
         ],
-        Resource = [module.weather_wiz_app_repository.repository_arn]
+        Resource = [
+          for repository in module.weather_wiz_app_repository : repository.repository_arn
+        ]
       },
       {
         Effect = "Allow",
