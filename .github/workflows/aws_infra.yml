@@ -1,0 +1,47 @@
+name: 'Terraform'
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  set_aws_infra:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::183067302538:role/GitHub_OIDC_ECR
+        role-session-name: terraform_aws
+        aws-region: us-east-1
+     
+    - name: Terraform Init
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.14.3
+        tf_actions_subcommand: 'init'
+        tf_actions_working_dir: '.'
+        tf_actions_comment: true
+    
+    - name: Terraform plan
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.14.3
+        tf_actions_subcommand: 'plan'
+        tf_actions_working_dir: '.'
+        tf_actions_comment: true
+      
+    - name: Terraform apply
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.14.3
+        tf_actions_subcommand: 'apply -auto-approve'
+        tf_actions_working_dir: '.'
+        tf_actions_comment: true
+    
