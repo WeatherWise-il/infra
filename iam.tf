@@ -14,7 +14,7 @@ resource "aws_iam_policy" "github_actions_user_access_policy" {
   depends_on = [
     module.weather_wiz_app_repository
   ]
-q
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
