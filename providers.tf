@@ -9,6 +9,12 @@ terraform {
       version = "4.0.5"
     }
   }
+   backend "s3" {
+    bucket         = "weather-wiz-terraform-state"
+    region         = "us-east-1"
+    key            = "weather_wiz/terraform.tfstate"
+    encrypt = true
+  }
 }
 # AWS provider
 provider "aws" {
